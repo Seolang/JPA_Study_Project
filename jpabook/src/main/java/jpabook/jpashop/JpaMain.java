@@ -3,6 +3,7 @@ package jpabook.jpashop;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,15 +24,16 @@ public class JpaMain {
 
         try {
 
-            /*
-            // 객체 지향적이지 않음 (Order -> memberId -> Member 순서를 거쳐 찾아야함)
-            Order order = em.find(Order.class, 1L);
-            Long memberId = order.getMemberId();
-            Member member = em.find(Member.class, memberId);
-             */
+            Order order = new Order();
+//            order.addOrderItem(new OrderItem()); // 양방향 연관관계를 이용할 경우
 
-            Order order = em.find(Order.class, 1L);
-            Member findMember = order.getMember();
+            // 단방향 연관관계만으로도 충분히 사용할 수 있음
+            em.persist(order);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+            
+            em.persist(orderItem);
+
 
             tx.commit();
         } catch (Exception e) {

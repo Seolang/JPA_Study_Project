@@ -19,6 +19,7 @@ public class Item {
 
     private int stockQuantity;
 
+
     public Long getId() {
         return id;
     }

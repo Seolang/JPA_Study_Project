@@ -2,6 +2,8 @@ package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
@@ -11,15 +13,21 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @Column(name = "MEMBER_ID")
-    private Long memberId;      // => 객체지향 적이지 않음 (관계형 DB에 맞춘 설정)
+//    @Column(name = "MEMBER_ID")
+//    private Long memberId;      // => 객체지향 적이지 않음 (관계형 DB에 맞춘 설정)
 
-    private  Member member;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems= new ArrayList<>();
 
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
 
     public Long getId() {
         return id;
@@ -29,12 +37,25 @@ public class Order {
         this.id = id;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public List<OrderItem> getOrderitems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
     }
 
     public LocalDateTime getOrderDate() {
@@ -53,11 +74,5 @@ public class Order {
         this.status = status;
     }
 
-    public Member getMember() {
-        return member;
-    }
 
-    public void setMember(Member member) {
-        this.member = member;
-    }
 }
