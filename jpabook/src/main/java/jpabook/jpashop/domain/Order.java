@@ -28,6 +28,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
 
     public Long getId() {
         return id;
@@ -74,5 +78,15 @@ public class Order {
         this.status = status;
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
 
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+    }
 }
