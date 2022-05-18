@@ -50,14 +50,7 @@ public class JpaMain {
 
             //전체 검색
             //별칭이 필수 (Member를 m으로 지정)
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(10)
-                    .getResultList();
 
-            for(Member member : result) {
-                System.out.println("member.name = "+member.getName());
-            }
             tx.commit();
 
         } catch (Exception e) {
