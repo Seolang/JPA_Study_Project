@@ -2,10 +2,12 @@ package hellojpa;
 
 import javax.persistence.*;
 
+// TABLE_PER_CLASS 전략은 추천하지 않음
+
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 상속 테이블 타입을 설정
-@DiscriminatorColumn   //Dtype을 생성해줌, Single Table 전략에선 자동으로 생성됨
-public class Item {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) // 상속 테이블 타입을 설정
+@DiscriminatorColumn   //Dtype을 생성해줌, Single Table 전략에선 자동으로 생성됨, Table Per Class 전략에서는 작동하지 않음
+public abstract class Item {
 
     @Id @GeneratedValue
     private Long id;

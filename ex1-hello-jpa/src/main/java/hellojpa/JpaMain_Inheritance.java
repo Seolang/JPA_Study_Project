@@ -28,7 +28,8 @@ public class JpaMain_Inheritance {
             em.clear();
 
             Movie findMovie = em.find(Movie.class, movie.getId());
-
+            // Item findMovie = em.find(Item.class, movie.getId());  Table Per Class 전략에서 부모 클래스로 find시 모든 테이블을 Union 하여 다 뒤져봐야함
+            //                                                       이는 색인 효율이 떨이짐
 
             tx.commit();
 
