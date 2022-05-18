@@ -1,6 +1,7 @@
 package jpabook.jpashop;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
@@ -24,15 +25,11 @@ public class JpaMain {
 
         try {
 
-            Order order = new Order();
-//            order.addOrderItem(new OrderItem()); // 양방향 연관관계를 이용할 경우
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영환");
 
-            // 단방향 연관관계만으로도 충분히 사용할 수 있음
-            em.persist(order);
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-            
-            em.persist(orderItem);
+            em.persist(book);
 
 
             tx.commit();
