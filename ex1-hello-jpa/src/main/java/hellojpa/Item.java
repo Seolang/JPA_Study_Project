@@ -3,8 +3,8 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED) // 상속 테이블 타입을 설정
-@DiscriminatorColumn   //Dtype을 자동으로 생성해줌, Single Table 전략에선 꼭 필요함
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 상속 테이블 타입을 설정
+@DiscriminatorColumn   //Dtype을 생성해줌, Single Table 전략에선 자동으로 생성됨
 public class Item {
 
     @Id @GeneratedValue
