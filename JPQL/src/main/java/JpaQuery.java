@@ -1,9 +1,8 @@
 import jpql.Member;
 
 import javax.persistence.*;
-import java.util.List;
 
-public class JpaMain {
+public class JpaQuery {
 
     public static void main(String[] args) {
 
