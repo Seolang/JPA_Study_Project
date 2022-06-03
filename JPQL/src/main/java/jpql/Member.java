@@ -17,7 +17,7 @@ public class Member {
     private MemberType type;
 
     public void changeTeam(Team team) {
-        this.team = team;
+        this.setTeam(team);
         team.getMembers().add(this);
     }
 
